@@ -1,22 +1,49 @@
-<h2>Lista de resultado - {{ lista.data.length }}</h2>
+<h2 class="m-3">Audience Finder</h2>
 
-<div>
-    <button class="btn btn-primary mb-3" (click)="getDados()">Buscar</button>
+<div class="w-100 d-flex justify-content-center">
+
+    <div class="w-50 text-center">
+
+        <div class="my-5">
+            <div class="form-inline">
+                
+                <div class="form-group w-75">
+                    <input type="text" class="form-control w-100 mr-3" placeholder="Digite o interesse: Pets, Meditação, Lowcarb...">
+                </div>
+                
+                <button class="btn btn-primary w-25" (click)="getDados()" [disabled]="buscando">
+                    Buscar Públicos
+                    <div class="spinner-border spinner-border-sm ml-2" role="status" *ngIf="buscando">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+
+            </div>
+
+        </div>
+
+        <table class="table table-striped text-left">
+            <thead>
+                <tr>
+                    <th scope="col">Interesse</th>
+                    <th scope="col">Tamanho do público</th>
+                    <th scope="col">Tópico</th>
+                </tr>
+            </thead>
+            <tbody>
+
+                <div *ngIf="!lista.data.length" class="alert alert-warning mt-5" role="alert">
+                    Sem dados a exibir
+                </div>
+
+                <tr *ngFor="let interesse of lista.data; index as i">
+                    <td>{{ interesse.name }}</td>
+                    <td>{{ interesse.audience_size | number }}</td>
+                    <td>{{ interesse.topic || 'Sem categoria' }}</td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
 </div>
-
-<table class="table table-striped">
-    <thead>
-        <tr>            
-            <th scope="col">Interesse</th>
-            <th scope="col">Tamanho do público</th>
-            <th scope="col">Tópico</th>
-        </tr>
-    </thead>
-    <tbody>
-        <tr *ngFor="let interesse of lista.data; index as i">            
-            <td>{{ interesse.name }}</td>
-            <td>{{ interesse.audience_size | number }}</td>
-            <td>{{ interesse.topic || 'Sem categoria' }}</td>
-        </tr>
-    </tbody>
-</table>

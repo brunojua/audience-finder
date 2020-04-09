@@ -10,6 +10,7 @@ import { FacebookApiService } from './../services/facebook-api.service';
 export class HomeComponent implements OnInit {
 
 	lista: any = {data: []};
+    buscando: boolean = false;
 
 	constructor(private fbapi: FacebookApiService) { }
 
@@ -18,10 +19,14 @@ export class HomeComponent implements OnInit {
 	}
 
 	getDados() {
+        this.buscando = true;
+
 		this.fbapi.getDados().subscribe(
 			res => {
 				console.log(res);
 				this.lista = res;
+                
+                this.buscando = false;
 			}
 		);
 	}
