@@ -9,15 +9,15 @@ import { FacebookApiService } from './../services/facebook-api.service';
 })
 export class HomeComponent implements OnInit {
 
-	lista: any;
+	lista: any = [];
 
 	constructor(private fbapi: FacebookApiService) { }
 
 	ngOnInit(): void {
-		this.listarDados();
+		
 	}
 
-	listarDados() {
+	getDados() {
 		this.fbapi.getDados().subscribe(
 			res => {
 				console.log(res);

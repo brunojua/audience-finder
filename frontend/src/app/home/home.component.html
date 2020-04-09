@@ -1,3 +1,22 @@
-<h2>Lista de resultado</h2>
+<h2>Lista de resultado - {{ lista.length }}</h2>
 
+<div>
+    <button class="btn btn-primary mb-3" (click)="getDados()">Buscar</button>
+</div>
 
+<table class="table table-striped">
+    <thead>
+        <tr>            
+            <th scope="col">Country</th>
+            <th scope="col">Area</th>
+            <th scope="col">Population</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let interesse of lista; index as i">            
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+    </tbody>
+</table>
