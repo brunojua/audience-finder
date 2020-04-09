@@ -9,7 +9,7 @@ import { FacebookApiService } from './../services/facebook-api.service';
 })
 export class HomeComponent implements OnInit {
 
-	lista: any = [];
+	lista: any = {data: []};
 
 	constructor(private fbapi: FacebookApiService) { }
 
