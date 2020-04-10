@@ -2,47 +2,56 @@
 
 <div class="w-100 d-flex justify-content-center">
 
-    <div class="w-50 text-center">
+    <div class="w-75 text-center">
 
         <div class="my-5">
             <div class="form-inline">
                 
                 <div class="form-group w-75">
-                    <input type="text" class="form-control w-100 mr-3" placeholder="Digite o interesse: Pets, Meditação, Lowcarb...">
+                    <input type="text" class="form-control w-100 mr-3 shadow" [(ngModel)]="keyword" placeholder="Digite o interesse: Pets, Meditação, Lowcarb...">
                 </div>
                 
                 <button class="btn btn-primary w-25" (click)="getDados()" [disabled]="buscando">
+                    <!-- <img src="assets/search.svg" class="af-btn-icons" mr-1> -->
                     Buscar Públicos
-                    <div class="spinner-border spinner-border-sm ml-2" role="status" *ngIf="buscando">
+                    <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
                         <span class="sr-only">Loading...</span>
                     </div>
                 </button>
 
             </div>
-
         </div>
 
-        <table class="table table-striped text-left">
+        <div class="font-weight-bold mt-5" *ngIf="busca_realizada && lista.data.length">A busca retornou {{ lista.data.length }} resultados</div>
+
+        <table class="table table-striped text-left mt-3" *ngIf="busca_realizada && lista.data.length">
             <thead>
                 <tr>
                     <th scope="col">Interesse</th>
                     <th scope="col">Tamanho do público</th>
                     <th scope="col">Tópico</th>
+                    <th scope="col">Buscar</th>
                 </tr>
             </thead>
+
             <tbody>
-
-                <div *ngIf="!lista.data.length" class="alert alert-warning mt-5" role="alert">
-                    Sem dados a exibir
-                </div>
-
                 <tr *ngFor="let interesse of lista.data; index as i">
                     <td>{{ interesse.name }}</td>
                     <td>{{ interesse.audience_size | number }}</td>
                     <td>{{ interesse.topic || 'Sem categoria' }}</td>
+                    <td></td>
+                    <td></td>
                 </tr>
             </tbody>
         </table>
+
+        <div class="spinner-border spinner-border text-primary" role="status" *ngIf="buscando">
+            <span class="sr-only">Loading...</span>
+        </div>
+
+        <div class="alert alert-warning mt-4" role="alert" *ngIf="!buscando && busca_realizada && !lista.data.length">
+            A busca não encontrou resultados para esse interesse, tente informar outro.
+        </div>
 
     </div>
 

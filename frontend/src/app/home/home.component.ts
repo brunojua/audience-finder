@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-
 import { FacebookApiService } from './../services/facebook-api.service';
+
+import Swal from 'sweetalert2'
 
 @Component({
 	selector: 'app-home',
@@ -10,23 +11,37 @@ import { FacebookApiService } from './../services/facebook-api.service';
 export class HomeComponent implements OnInit {
 
 	lista: any = {data: []};
-    buscando: boolean = false;
+	buscando: boolean = false;
+	keyword: string;
+	erro_keyword: boolean = false;
+	busca_realizada: boolean = false;
 
 	constructor(private fbapi: FacebookApiService) { }
 
-	ngOnInit(): void {
+	ngOnInit(): void {}
+
+	getDados() {	
 		
-	}
+		if(!this.keyword) {
+			Swal.fire({				
+				icon: 'warning',
+				text: 'Informe uma palavra chave para Pesquisa',
+				showConfirmButton: true,
+				confirmButtonText: 'Fechar'
+			});
 
-	getDados() {
-        this.buscando = true;
+			return;
+		}
 
-		this.fbapi.getDados().subscribe(
+		this.lista.data = [];
+		this.buscando = true;
+		
+		this.fbapi.getDados(this.keyword).subscribe(
 			res => {
 				console.log(res);
-				this.lista = res;
-                
                 this.buscando = false;
+				this.busca_realizada = true;
+				this.lista = res;
 			}
 		);
 	}
