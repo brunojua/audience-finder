@@ -9,11 +9,13 @@ import { AppComponent } from './app.component';
 
 import { FacebookApiService } from './services/facebook-api.service';
 import { HomeComponent } from './home/home.component';
+import { NavmenuComponent } from './navmenu/navmenu.component';
 
 @NgModule({
     declarations: [
         AppComponent,
-        HomeComponent
+        HomeComponent,
+        NavmenuComponent
     ],
     imports: [
         BrowserModule,

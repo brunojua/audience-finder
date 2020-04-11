@@ -1,10 +1,10 @@
-<h2 class="m-3">Audience Finder</h2>
+<app-navmenu></app-navmenu>
 
 <div class="w-100 d-flex justify-content-center">
 
-    <div class="w-75 text-center">
+    <div class="w-100 px-5 text-center">
 
-        <div class="my-5">
+        <div class="mt-4 mb-5">
             <div class="form-inline">
                 
                 <div class="form-group w-75">
@@ -22,7 +22,12 @@
             </div>
         </div>
 
-        <div class="font-weight-bold mt-5" *ngIf="busca_realizada && lista.data.length">A busca retornou {{ lista.data.length }} resultados</div>
+        <h5 class="text-left">Caixa de seleção</h5>
+        <div class="shadow w-100 rounded border p-2">
+            damskmkamdkl daklmlkas
+        </div>
+
+        <h5 class="mt-5 text-left" *ngIf="busca_realizada && lista.data.length">Explore {{ lista.data.length }} resultados relacionados a {{ keyword_exibicao }}</h5>
 
         <table class="table table-striped text-left mt-3" *ngIf="busca_realizada && lista.data.length">
             <thead>
@@ -39,8 +44,11 @@
                     <td>{{ interesse.name }}</td>
                     <td>{{ interesse.audience_size | number }}</td>
                     <td>{{ interesse.topic || 'Sem categoria' }}</td>
-                    <td></td>
-                    <td></td>
+                    <td>                        
+                        <img src="assets/facebook.svg" height="20" class="af-icon-button mr-3">
+                        <img src="assets/google.svg" height="20" class="af-icon-button mr-3">
+                        <img src="assets/search.svg" height="20" class="af-icon-button">
+                    </td>                    
                 </tr>
             </tbody>
         </table>

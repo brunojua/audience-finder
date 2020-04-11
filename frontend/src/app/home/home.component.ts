@@ -15,6 +15,7 @@ export class HomeComponent implements OnInit {
 	keyword: string;
 	erro_keyword: boolean = false;
 	busca_realizada: boolean = false;
+	keyword_exibicao: string;
 
 	constructor(private fbapi: FacebookApiService) { }
 
@@ -32,6 +33,8 @@ export class HomeComponent implements OnInit {
 
 			return;
 		}
+
+		this.keyword_exibicao = this.keyword;
 
 		this.lista.data = [];
 		this.buscando = true;
