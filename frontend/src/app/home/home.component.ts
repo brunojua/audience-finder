@@ -49,4 +49,16 @@ export class HomeComponent implements OnInit {
 		);
 	}
 
+	copiarInteresses() {
+
+	}
+
+	exportarInteresses() {
+
+	}
+
+	limparSelecao() {
+		
+	}
+
 }

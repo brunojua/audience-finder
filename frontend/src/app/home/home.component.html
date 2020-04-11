@@ -99,51 +99,77 @@
             <span class="sr-only">Loading...</span>
         </div>
 
-        <h6 class="mt-5 text-left">Caixa de seleção de interesses</h6>
-        <div class="w-100 rounded border p-2 af-caixa-selecao text-left">
-            <span class="badge badge-primary mr-2 p-2">
-                Meditação
-                <img src="assets/close.svg" height="8" class="af-icon-badge ml-1" />                
-            </span>
-            <span class="badge badge-primary mr-2">Meditação transcendental</span>
-            <span class="badge badge-primary mr-2">Auto iluminação</span>
-            <span class="badge badge-primary mr-2">Poder pessoal</span>
-        </div>
         
-        <div *ngIf="busca_realizada && lista.data.length" class="mt-4">
-            <h6 class="text-left">Explore {{ lista.data.length }} resultados relacionados a "{{ keyword_exibicao }}"</h6>
+        <div *ngIf="busca_realizada && lista.data.length" class="mt-5">
             
-            <table class="table table-striped table-striped-sm text-left mt-3" *ngIf="busca_realizada && lista.data.length">
-                <thead style="font-size: medium;">
-                    <tr>
-                        <th scope="col">Selecionar</th>
-                        <th scope="col">Interesse</th>
-                        <th scope="col">Tamanho do público</th>
-                        <th scope="col">Tópico</th>
-                        <th scope="col">Buscar</th>
-                    </tr>
-                </thead>
-    
-                <tbody style="font-size: small;">
-                    <tr *ngFor="let interesse of lista.data; index as i">
-                        <td>
-                            <div class="form-check">
-                                <input class="form-check-input af-checkbox" type="checkbox" value="" id="defaultCheck1">
-                            </div>
+            <div class="clearfix">
+                <h6 class="float-left text-left">Caixa de seleção de interesses</h6>
+                <button class="float-right btn btn-sm btn-primary bg-transparent border-0 text-primary" (click)="limparSelecao()">
+                    Limpar Seleção                    
+                </button>
+            </div>
 
-                            <img src="assets/copy.svg" height="20" class="af-icon-button ml-5">
-                        </td>
-                        <td>{{ interesse.name }}</td>
-                        <td>{{ interesse.audience_size | number }}</td>
-                        <td>{{ interesse.topic || 'Sem categoria' }}</td>
-                        <td>
-                            <img src="assets/facebook.svg" height="20" class="af-icon-button mr-3">
-                            <img src="assets/google.svg" height="20" class="af-icon-button mr-3">
-                            <img src="assets/search.svg" height="20" class="af-icon-button">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+            <div class="w-100 rounded border p-2 af-caixa-selecao text-left">
+                <span class="badge badge-primary mr-2 p-2">
+                    Meditação
+                    <img src="assets/close.svg" height="8" class="af-icon-badge ml-1" />                
+                </span>
+                <span class="badge badge-primary mr-2">Meditação transcendental</span>
+                <span class="badge badge-primary mr-2">Auto iluminação</span>
+                <span class="badge badge-primary mr-2">Poder pessoal</span>
+            </div>
+
+            <div class="text-right">
+                <button class="btn btn-sm btn-primary bg-transparent border-0 text-primary mr-3" (click)="copiarInteresses()" [disabled]="buscando">
+                    Copiar
+                    <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+
+                <button class="btn btn-sm btn-primary bg-transparent border-0 text-primary" (click)="exportarInteresses()" [disabled]="buscando">
+                    Exportar Para CSV
+                    <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+            </div>
+
+            <h6 class="text-left mt-3">Explore {{ lista.data.length }} resultados relacionados a "{{ keyword_exibicao }}"</h6>
+
+            <div class="af-box-resultados w-100">
+                <table class="table table-striped table-striped-sm text-left mt-3" *ngIf="busca_realizada && lista.data.length">
+                    <thead style="font-size: medium;">
+                        <tr>
+                            <th scope="col">Selecionar</th>
+                            <th scope="col">Interesse</th>
+                            <th scope="col">Tamanho do público</th>
+                            <th scope="col">Tópico</th>
+                            <th scope="col">Buscar</th>
+                        </tr>
+                    </thead>
+                    
+                    <tbody style="font-size: small;">
+                        <tr *ngFor="let interesse of lista.data; index as i">
+                            <td>
+                                <div class="form-check">
+                                    <input class="form-check-input af-checkbox" type="checkbox" value="" id="defaultCheck1">
+                                </div>
+    
+                                <img src="assets/copy.svg" height="20" class="af-icon-button ml-5">
+                            </td>
+                            <td>{{ interesse.name }}</td>
+                            <td>{{ interesse.audience_size | number }}</td>
+                            <td>{{ interesse.topic || 'Sem categoria' }}</td>
+                            <td>
+                                <img src="assets/facebook.svg" height="20" class="af-icon-button mr-3">
+                                <img src="assets/google.svg" height="20" class="af-icon-button mr-3">
+                                <img src="assets/search.svg" height="20" class="af-icon-button">
+                            </td>
+                        </tr>
+                    </tbody>                        
+                </table>
+            </div>
         </div>
 
         <div class="alert alert-warning mt-4" role="alert" *ngIf="!buscando && busca_realizada && !lista.data.length">

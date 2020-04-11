@@ -10,5 +10,10 @@
 }
 
 .af-caixa-selecao{
-    height: 10vh;
+    height: 8vh;
+}
+
+.af-box-resultados{
+    max-height: 62vh;
+    overflow-y: scroll;
 }
