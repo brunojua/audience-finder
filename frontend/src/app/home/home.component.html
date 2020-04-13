@@ -104,24 +104,39 @@
             
             <div class="clearfix">
                 <h6 class="float-left text-left">Caixa de seleção de interesses</h6>
-                <button class="float-right btn btn-sm btn-primary bg-transparent border-0 text-primary" (click)="limparSelecao()">
-                    Limpar Seleção                    
+
+                <button class="float-right btn btn-sm btn-outline-primary px-2 py-0" (click)="limparSelecao()" [disabled]="limpandoSelecao">
+                    Limpar Seleção
+                    <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="limpandoSelecao">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+                
+                <button class="float-right btn btn-sm btn-outline-primary px-2 py-0 mr-3" (click)="exportarInteresses()" [disabled]="buscando">
+                    Exportar Para CSV
+                    <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+
+                <button class="float-right btn btn-sm btn-outline-primary px-2 py-0 mr-3" (click)="copiarInteresses()" [disabled]="buscando">
+                    Copiar Interesses
+                    <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
+                        <span class="sr-only">Loading...</span>
+                    </div>
                 </button>
             </div>
 
             <div class="w-100 rounded border p-2 af-caixa-selecao text-left">
-                <span class="badge badge-primary mr-2 p-2">
-                    Meditação
+                <span class="badge badge-secondary mr-2" style="cursor: pointer;" *ngFor="let interesse of caixaSelecao; index as i" (click)="removerInteresseCaixaSelecao(interesse, i)">
+                    {{ interesse.name }}
                     <img src="assets/close.svg" height="8" class="af-icon-badge ml-1" />                
-                </span>
-                <span class="badge badge-primary mr-2">Meditação transcendental</span>
-                <span class="badge badge-primary mr-2">Auto iluminação</span>
-                <span class="badge badge-primary mr-2">Poder pessoal</span>
+                </span>                
             </div>
 
-            <div class="text-right">
+            <!-- <div class="text-right">
                 <button class="btn btn-sm btn-primary bg-transparent border-0 text-primary mr-3" (click)="copiarInteresses()" [disabled]="buscando">
-                    Copiar
+                    Copiar Interesses
                     <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
                         <span class="sr-only">Loading...</span>
                     </div>
@@ -133,9 +148,9 @@
                         <span class="sr-only">Loading...</span>
                     </div>
                 </button>
-            </div>
+            </div> -->
 
-            <h6 class="text-left mt-3">Explore {{ lista.data.length }} resultados relacionados a "{{ keyword_exibicao }}"</h6>
+            <h6 class="text-left mt-4">Explore {{ lista.data.length }} resultados relacionados a "{{ keyword_exibicao }}"</h6>
 
             <div class="af-box-resultados w-100">
                 <table class="table table-striped table-striped-sm text-left mt-3" *ngIf="busca_realizada && lista.data.length">
@@ -153,7 +168,7 @@
                         <tr *ngFor="let interesse of lista.data; index as i">
                             <td>
                                 <div class="form-check">
-                                    <input class="form-check-input af-checkbox" type="checkbox" value="" id="defaultCheck1">
+                                    <input class="form-check-input af-checkbox" [(ngModel)]="lista.data[i].marcado" (ngModelChange)="addInteresseASelecao(interesse, i)" type="checkbox" value="i" id="defaultCheck1">
                                 </div>
     
                                 <img src="assets/copy.svg" height="20" class="af-icon-button ml-5">
@@ -172,7 +187,7 @@
             </div>
         </div>
 
-        <div class="alert alert-warning mt-4" role="alert" *ngIf="!buscando && busca_realizada && !lista.data.length">
+        <div class="alert alert-warning mt-5" role="alert" *ngIf="!buscando && busca_realizada && !lista.data.length">
             A busca não encontrou resultados para esse interesse, tente informar outro.
         </div>
 

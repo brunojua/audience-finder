@@ -17,6 +17,10 @@ export class HomeComponent implements OnInit {
 	busca_realizada: boolean = false;
 	keyword_exibicao: string;
 
+
+	caixaSelecao: any = [];
+	limpandoSelecao: boolean = false;
+
 	constructor(private fbapi: FacebookApiService) { }
 
 	ngOnInit(): void {}
@@ -58,7 +62,39 @@ export class HomeComponent implements OnInit {
 	}
 
 	limparSelecao() {
+		this.limpandoSelecao = true;
+
+		this.caixaSelecao = null;
+
+		this.lista.data.map(interesse => {
+			if(interesse.marcado) {
+				interesse.marcado = false;
+			}
+		});
+
+		setTimeout(() => {
+			this.limpandoSelecao = false;			
+		}, 1500);
+	}
+
+	addInteresseASelecao(interesse: any, index: any) {
+
+		if(this.lista.data[index].marcado) {
+			this.caixaSelecao.push(interesse);
+		} else {
+			this.caixaSelecao.splice(this.caixaSelecao.indexOf(interesse), 1);
+		}
+
+		console.log(this.caixaSelecao);
+		console.log(this.lista.data);
+	}
+
+	removerInteresseCaixaSelecao(interesse: any, index: any) {
+		this.caixaSelecao.splice(index, 1);
 		
+		let idx = this.lista.data.indexOf(interesse);				
+
+		this.lista.data[idx].marcado = false;		
 	}
 
 }
