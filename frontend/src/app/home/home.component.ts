@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FacebookApiService } from './../services/facebook-api.service';
+import { UtilsService } from '../utils';
 
 import Swal from 'sweetalert2'
 
@@ -21,12 +22,11 @@ export class HomeComponent implements OnInit {
 	caixaSelecao: any = [];
 	limpandoSelecao: boolean = false;
 
-	constructor(private fbapi: FacebookApiService) { }
+	constructor(private fbapi: FacebookApiService, public utils: UtilsService) { }
 
 	ngOnInit(): void {}
 
-	getDados() {	
-		
+	getDados() {		
 		if(!this.keyword) {
 			Swal.fire({				
 				icon: 'warning',
@@ -45,7 +45,6 @@ export class HomeComponent implements OnInit {
 		
 		this.fbapi.getDados(this.keyword).subscribe(
 			res => {
-				console.log(res);
                 this.buscando = false;
 				this.busca_realizada = true;
 				this.lista = res;
@@ -55,6 +54,49 @@ export class HomeComponent implements OnInit {
 
 	copiarInteresses() {
 
+		if(!this.caixaSelecao.length) {
+			this.utils.toastErro('Não há interesses selecionados');
+			return;
+		}
+
+		let arrayNomes = [];
+		let stringFinal = null;
+
+		this.caixaSelecao.map(interesse => {
+			arrayNomes.push(interesse.name);
+		});
+
+		stringFinal = arrayNomes.toString();
+
+		let selBox = document.createElement('textarea');
+		selBox.style.position = 'fixed';
+		selBox.style.left = '0';
+		selBox.style.top = '0';
+		selBox.style.opacity = '0';
+		selBox.value = stringFinal;
+		document.body.appendChild(selBox);
+		selBox.focus();
+		selBox.select();
+		document.execCommand('copy');
+		document.body.removeChild(selBox);
+		
+		this.utils.toastSucesso('Copiado');
+	}
+
+	copiarInteresse(interesse: any) {		
+		let selBox = document.createElement('textarea');
+		selBox.style.position = 'fixed';
+		selBox.style.left = '0';
+		selBox.style.top = '0';
+		selBox.style.opacity = '0';
+		selBox.value = interesse;
+		document.body.appendChild(selBox);
+		selBox.focus();
+		selBox.select();
+		document.execCommand('copy');
+		document.body.removeChild(selBox);
+		
+		this.utils.toastSucesso('Copiado');
 	}
 
 	exportarInteresses() {
@@ -62,9 +104,14 @@ export class HomeComponent implements OnInit {
 	}
 
 	limparSelecao() {
+		if(!this.caixaSelecao.length) {
+			this.utils.toastErro('Não há interesses selecionados');
+			return;
+		}
+
 		this.limpandoSelecao = true;
 
-		this.caixaSelecao = null;
+		this.caixaSelecao = [];
 
 		this.lista.data.map(interesse => {
 			if(interesse.marcado) {
@@ -74,19 +121,15 @@ export class HomeComponent implements OnInit {
 
 		setTimeout(() => {
 			this.limpandoSelecao = false;			
-		}, 1500);
+		}, 700);
 	}
 
 	addInteresseASelecao(interesse: any, index: any) {
-
 		if(this.lista.data[index].marcado) {
 			this.caixaSelecao.push(interesse);
 		} else {
 			this.caixaSelecao.splice(this.caixaSelecao.indexOf(interesse), 1);
-		}
-
-		console.log(this.caixaSelecao);
-		console.log(this.lista.data);
+		}		
 	}
 
 	removerInteresseCaixaSelecao(interesse: any, index: any) {

@@ -11,6 +11,8 @@ import { FacebookApiService } from './services/facebook-api.service';
 import { HomeComponent } from './home/home.component';
 import { NavmenuComponent } from './navmenu/navmenu.component';
 
+import { UtilsService } from './utils';
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -22,11 +24,12 @@ import { NavmenuComponent } from './navmenu/navmenu.component';
         AppRoutingModule,
         HttpClientModule,
         NgbModule,
-        FormsModule
+        FormsModule        
         // Observable
     ],
     providers: [
-        FacebookApiService
+        FacebookApiService,
+        UtilsService
     ],
     bootstrap: [AppComponent]
 })
