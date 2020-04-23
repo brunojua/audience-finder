@@ -12,7 +12,7 @@
                         placeholder="Digite o interesse: Pets, Meditação, Lowcarb...">
                 </div>
 
-                <button class="btn btn-lg btn-primary w-25" (click)="getDados()" [disabled]="buscando">                    
+                <button type="submit" class="btn btn-lg btn-primary w-25" (click)="getDados()" [disabled]="buscando">                    
                     Buscar Públicos
                     <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
                         <span class="sr-only">Loading...</span>
@@ -65,9 +65,9 @@
                             <td>{{ interesse.audience_size | number }}</td>
                             <td>{{ interesse.topic || 'Sem categoria' }}</td>
                             <td>
-                                <img src="assets/facebook.svg" height="20" class="af-icon-button mr-3">
-                                <img src="assets/google.svg" height="20" class="af-icon-button mr-3">
-                                <img src="assets/search.svg" height="20" class="af-icon-button">
+                                <img src="assets/facebook.svg" height="20" class="af-icon-button mr-3" (click)="pesquisarFacebook(interesse)">
+                                <img src="assets/google.svg" height="20" class="af-icon-button mr-3" (click)="pesquisarGoogle(interesse)">
+                                <img src="assets/search.svg" height="20" class="af-icon-button" (click)="pesquisarAudienceFinder(interesse)">
                             </td>
                         </tr>
                     </tbody>                        

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FacebookApiService } from './../services/facebook-api.service';
 import { UtilsService } from '../utils';
+// import { window } from 'rxjs/operators';
 
 import Swal from 'sweetalert2'
 
@@ -140,4 +141,23 @@ export class HomeComponent implements OnInit {
 		this.lista.data[idx].marcado = false;		
 	}
 
+	pesquisarAudienceFinder(interesse: any) {
+		this.keyword = interesse.name;
+
+		this.getDados();
+	}
+
+	pesquisarFacebook(interesse: any) {
+		let query = 'https://www.facebook.com/search/top/?q=' + interesse.name;
+		
+		window.open(query, "_blank");
+	}
+
+	pesquisarGoogle(interesse: any) {		
+		let url = 'https://www.google.com/search?sxsrf=ALeKk0254jSkLRMJLUSIe9Pzx0ovLI3v6Q%3A1587599634784&source=hp&ei=EtmgXvriLOKG0Ab196i4Dw&q=';	
+
+		let url_final = url + interesse.name;
+
+		window.open(url_final, "_blank");
+	}
 }
