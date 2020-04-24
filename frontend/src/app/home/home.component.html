@@ -2,7 +2,7 @@
 
 <div class="row ml-2 mr-0 pr-0">
 
-    <div class="col-9">
+    <div class="col-12">
 
         <div class="mt-4">
             <div class="form-inline">
@@ -55,9 +55,9 @@
                     <tbody style="font-size: small;">
                         <tr *ngFor="let interesse of lista.data; index as i">
                             <td>
-                                <div class="form-check">
+                                <!-- <div class="form-check">
                                     <input class="form-check-input af-checkbox" [(ngModel)]="lista.data[i].marcado" (ngModelChange)="addInteresseASelecao(interesse, i)" type="checkbox" value="i" id="defaultCheck1">
-                                </div>
+                                </div> -->
     
                                 <img src="assets/copy.svg" height="20" class="af-icon-button ml-5" (click)="copiarInteresse(interesse.name)">
                             </td>
@@ -77,7 +77,7 @@
 
     </div>
 
-    <div class="col-3 bg-light vh-100">
+    <!-- <div class="col-3 bg-light vh-100">
         <div class="bg-white border rounded p-3 mt-4 text-dark af-caixa-selecao-lateral">
             <div class="clearfix">
                 <span><strong>Caixa de seleção</strong></span>
@@ -105,16 +105,16 @@
                     Copiar Interesses                    
                 </button>
 
-                <!-- <button class="float-right btn btn-sm btn-outline-primary px-2 py-0" (click)="exportarInteresses()" [disabled]="buscando">
+                <button class="float-right btn btn-sm btn-outline-primary px-2 py-0" (click)="exportarInteresses()" [disabled]="buscando">
                     Exportar Para CSV
                     <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
                         <span class="sr-only">Loading...</span>
                     </div>
-                </button> -->
+                </button>
             </div>
 
         </div>
-    </div>
+    </div> -->
 </div>
 
 <!-- <div class="w-100 d-flex justify-content-center">
