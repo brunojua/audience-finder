@@ -145,6 +145,8 @@ export class HomeComponent implements OnInit {
 		this.keyword = interesse.name;
 
 		this.getDados();
+
+		// window.scrollTo(0, 0);
 	}
 
 	pesquisarFacebook(interesse: any) {
