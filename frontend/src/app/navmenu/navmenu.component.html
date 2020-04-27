@@ -1,24 +1,23 @@
-<nav class="navbar navbar-dark bg-primary">
-    <a class="navbar-brand" href="#"><strong>Audience Finder</strong></a>
-
-    <!-- <div class="form-inline w-50">
-
-        <div class="form-group w-75">
-            <input type="text" class="form-control mr-3 w-100" [(ngModel)]="keyword"
-                placeholder="Digite o interesse: Pets, Meditação, Lowcarb...">
+<nav class="navbar bg-primary navbar-dark fixed-top py-3">
+    <div class="row w-100">
+        <div class="col-3">
+            <a class="navbar-brand text-white" href="#"><strong>Audience Finder</strong></a>
         </div>
 
-        <button class="btn btn-light" (click)="getDados()" [disabled]="buscando">
-            Buscar Públicos
-            <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
-                <span class="sr-only">Loading...</span>
-            </div>
-        </button>
-    </div> -->
+        <div class="col-7">
+            <form class="form-inline">
+                <input class="form-control w-75 mr-2" type="search" [(ngModel)]="keyword" placeholder="Digite o interesse: Pets, Meditação, Lowcarb...">
+                <button class="btn btn-light" type="submit" (click)="getDados()" [disabled]="buscando">
+                    Buscar Públicos
+                    <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
+            </form>
+        </div>
 
-    <div class="navbar-nav">
-        <!-- <a href="#" class="btn">Perfil</a>
-        <a href="#" class="btn">Coleções</a> -->        
-        <!-- <a href="#" class="nav-item nav-link font-weight-bold">Sair</a> -->
+        <div class="col-2 text-right">
+            dasdasd
+        </div>
     </div>
 </nav>

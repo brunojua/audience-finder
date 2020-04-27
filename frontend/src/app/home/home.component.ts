@@ -27,7 +27,8 @@ export class HomeComponent implements OnInit {
 
 	ngOnInit(): void {}
 
-	getDados() {		
+	getDados() {
+		console.log(this.keyword);				
 		if(!this.keyword) {
 			Swal.fire({				
 				icon: 'warning',
