@@ -1,15 +1,15 @@
 <!-- <app-navmenu></app-navmenu> -->
 
-<nav class="navbar bg-primary navbar-dark fixed-top py-3">
-    <div class="row w-100">
+<nav class="navbar bg-primary navbar-dark fixed-top">
+    <div class="row w-100 d-flex align-items-center">
         <div class="col-3">
-            <a class="navbar-brand text-white" href="#"><strong>Audience Finder</strong></a>
+            <img src="assets/logo.png" height="45" class="navbar-brand" href="#" />
         </div>
 
         <div class="col-7">
             <form class="form-inline">
                 <input class="form-control w-75 mr-2" [ngModelOptions]="{standalone: true}" type="search" [(ngModel)]="keyword" placeholder="Digite o interesse: Pets, Meditação, Lowcarb...">
-                <button class="btn btn-light" type="submit" (click)="getDados()" [disabled]="buscando">
+                <button class="btn btn-light px-3" type="submit" (click)="getDados()" [disabled]="buscando">
                     Buscar Públicos
                     <div class="spinner-border spinner-border-sm ml-1" role="status" *ngIf="buscando">
                         <span class="sr-only">Loading...</span>
