@@ -1,3 +1,7 @@
+Desenvolvi este app para práticar minhas habilidades de frontend
+
+Link para o projeto ao vivo: https://brunojua.github.io/audience-finder/
+
 # Frontend
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.0.
